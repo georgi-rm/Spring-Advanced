@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Airline Tickets Application</title>
+    <th:block th:replace="~{fragments/head}"/>
+    <script th:src="@{/js/airplane-details.js}" type="module"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Navigation -->
+
+    <header th:insert="~{fragments/navigation::navigation}"></header>
+
+    <!-- Boxes Section -->
+    <section id="details">
+
+    </section>
+</div>
+
+<th:block th:replace="~{fragments/footer}" />
+
+</body>
+</html>

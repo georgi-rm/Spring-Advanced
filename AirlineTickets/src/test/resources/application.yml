@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+
+
+airline-tickets:
+  admin:
+    default-pass: ${DEFAULT_PASS:TopSecret}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head></head>
+<body>
+
+<nav class="main-nav" th:fragment="navigation">
+        <ul>
+            <li class="nav-item active">
+                <a class="btn nav-link" href="/">Home</a>
+            </li>
+            <th:block sec:authorize="!isAuthenticated()">
+                <li class="nav-item">
+                    <a class="btn nav-link" href="/users/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn nav-link" href="/users/register">Register</a>
+                </li>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+            <li class="nav-item" sec:authorize="hasRole('MODERATOR')">
+                <a class="btn nav-link" href="/airplanes/add">Add Airplane</a>
+            </li>
+            <li class="nav-item">
+                <form class="main-nav"
+                        th:method="post"
+                        th:action="@{/users/logout}">
+                    <input class="btn btn-link nav-link" type="submit" value="Logout">
+                </form>
+            </li>
+            </th:block>
+        </ul>
+</nav>
+
+</body>
+</html>

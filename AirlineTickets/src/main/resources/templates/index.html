@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Airline Tickets Application</title>
+    <th:block th:replace="~{fragments/head}"/>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Navigation -->
+
+    <header th:insert="~{fragments/navigation::navigation}"></header>
+
+    <!-- Top Container -->
+    <section class="top-container">
+        <div class="showcase">
+            <h1>Find amazing destinations</h1>
+            <p>Be inspired by our offers and fly with us to the most beautiful destinations worldwide.</p>
+            <form th:action="@{/search}"
+                  th:method="post"
+                  th:object="${searchFlightDto}"
+                  class="text-light">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="location-from">From</label>
+                        <select id="location-from" class="form-control" aria-label="Default select example" th:field="*{originAirportId}">
+                            <option selected th:value = "null">Select Airport from</option>
+                            <option th:each="airport: ${allAirports}"
+                                    th:value="${airport.getId()}"
+                                    th:text="${airport.getName()}"
+                                    th:selected="${e} == *{originAirportId}" />
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="location-to">To</label>
+                        <select id="location-to" class="form-control" aria-label="Default select example" th:field="*{destinationAirportId}">
+                            <option selected th:value = "null">Select Airport to</option>
+                            <option th:each="airport: ${allAirports}"
+                                    th:value="${airport.getId()}"
+                                    th:text="${airport.getName()}"
+                                    th:selected="${e} == *{destinationAirportId}" />
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Search flights</button>
+            </form>
+        </div>
+        <div class="top-box top-box-a">
+            <h4>Времето в София</h4>
+            <h4><span id="box-a-temp">15</span><span>&#8451;</span></h4>
+            <img id="box-a-img" src="/images/sun.png" height="150px" alt="">
+        </div>
+        <div class="top-box top-box-b">
+            <h4>Времето в Созопол</h4>
+            <h4><span id="box-b-temp">27</span><span>&#8451;</span></h4>
+            <img id="box-b-img" src="/images/cloudy.png" height="150px" alt="">
+        </div>
+    </section>
+
+    <!-- Boxes Section -->
+    <section class="boxes">
+        <a href="/airplanes" class="main-btn">
+            <div class="box">
+                <img src="/images/airplanes.png" height="150px" alt="">
+                <h3>Fleet</h3>
+                <p>Check all available airplanes</p>
+            </div>
+        </a>
+        <a href="/airports" class="main-btn">
+            <div class="box">
+                <img src="/images/airports.png" height="150px" alt="">
+                <h3>Airports</h3>
+                <p>Check all available airports</p>
+            </div>
+        </a>
+        <a href="/" class="main-btn">
+            <div class="box">
+                <img src="/images/motorcycle.png" height="150px" alt="">
+                <h3>Motorcycle</h3>
+                <p>When you want the wind to blow on your face!</p>
+            </div>
+        </a>
+        <a href="/" class="main-btn">
+            <div class="box">
+                <img src="/images/car.png" height="150px" alt="">
+                <h3>Car</h3>
+                <p>Going on a trip with friends?</p>
+            </div>
+        </a>
+    </section>
+</div>
+
+<th:block th:replace="~{fragments/footer}" />
+</body>
+</html>

@@ -1,0 +1,172 @@
+package com.example.airlinetickets.models.entities;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "flights")
+public class Flight extends BaseEntity{
+
+    @Column(name = "departure_time", nullable = false)
+    private LocalDateTime departureDateTime;
+
+    @Column(name = "arrival_time", nullable = false)
+    private LocalDateTime arrivalDateTime;
+
+    @ManyToOne
+    private AirportEntity originAirportEntity;
+
+    @ManyToOne
+    private AirportEntity destinationAirportEntity;
+
+    @Column(nullable = false)
+    private Integer distance;
+
+    @Column(name = "premium_ticket_price")
+    private BigDecimal premiumTicketPrice;
+
+    @Column(name = "business_ticket_price")
+    private BigDecimal businessTicketPrice;
+
+    @Column(name = "economy_ticket_price")
+    private BigDecimal economyTicketPrice;
+
+    @ManyToOne
+    private AirplaneEntity airplaneEntity;
+
+    @Column(name = "premium_seats", nullable = false)
+    private Integer premiumSeats;
+
+    @Column(name = "business_seats", nullable = false)
+    private Integer businessSeats;
+
+    @Column(name = "economy_seats", nullable = false)
+    private Integer economySeats;
+
+    private String terminal;
+
+    public Flight() {
+    }
+
+    public LocalDateTime getDepartureDateTime() {
+        return departureDateTime;
+    }
+
+    public Flight setDepartureDateTime(LocalDateTime departureDateTime) {
+        this.departureDateTime = departureDateTime;
+        return this;
+    }
+
+    public LocalDateTime getArrivalDateTime() {
+        return arrivalDateTime;
+    }
+
+    public Flight setArrivalDateTime(LocalDateTime arrivalDateTime) {
+        this.arrivalDateTime = arrivalDateTime;
+        return this;
+    }
+
+    public AirportEntity getOriginAirport() {
+        return originAirportEntity;
+    }
+
+    public Flight setOriginAirport(AirportEntity originAirportEntity) {
+        this.originAirportEntity = originAirportEntity;
+        return this;
+    }
+
+    public AirportEntity getDestinationAirport() {
+        return destinationAirportEntity;
+    }
+
+    public Flight setDestinationAirport(AirportEntity destinationAirportEntity) {
+        this.destinationAirportEntity = destinationAirportEntity;
+        return this;
+    }
+
+    public Integer getDistance() {
+        return distance;
+    }
+
+    public Flight setDistance(Integer distance) {
+        this.distance = distance;
+        return this;
+    }
+
+    public BigDecimal getPremiumTicketPrice() {
+        return premiumTicketPrice;
+    }
+
+    public Flight setPremiumTicketPrice(BigDecimal premiumTicketPrice) {
+        this.premiumTicketPrice = premiumTicketPrice;
+        return this;
+    }
+
+    public BigDecimal getBusinessTicketPrice() {
+        return businessTicketPrice;
+    }
+
+    public Flight setBusinessTicketPrice(BigDecimal businessTicketPrice) {
+        this.businessTicketPrice = businessTicketPrice;
+        return this;
+    }
+
+    public BigDecimal getEconomyTicketPrice() {
+        return economyTicketPrice;
+    }
+
+    public Flight setEconomyTicketPrice(BigDecimal economyTicketPrice) {
+        this.economyTicketPrice = economyTicketPrice;
+        return this;
+    }
+
+    public AirplaneEntity getAirplane() {
+        return airplaneEntity;
+    }
+
+    public Flight setAirplane(AirplaneEntity airplaneEntity) {
+        this.airplaneEntity = airplaneEntity;
+        return this;
+    }
+
+    public Integer getPremiumSeats() {
+        return premiumSeats;
+    }
+
+    public Flight setPremiumSeats(Integer premiumSeats) {
+        this.premiumSeats = premiumSeats;
+        return this;
+    }
+
+    public Integer getBusinessSeats() {
+        return businessSeats;
+    }
+
+    public Flight setBusinessSeats(Integer businessSeats) {
+        this.businessSeats = businessSeats;
+        return this;
+    }
+
+    public Integer getEconomySeats() {
+        return economySeats;
+    }
+
+    public Flight setEconomySeats(Integer economySeats) {
+        this.economySeats = economySeats;
+        return this;
+    }
+
+    public String getTerminal() {
+        return terminal;
+    }
+
+    public Flight setTerminal(String terminal) {
+        this.terminal = terminal;
+        return this;
+    }
+}
