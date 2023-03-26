@@ -16,12 +16,12 @@ public class AirportEntity extends BaseEntity {
     private String abbreviation;
 
     @ManyToOne()
-    private City city;
+    private CityEntity city;
 
     public AirportEntity() {
     }
 
-    public AirportEntity(String name, String abbreviation, City city) {
+    public AirportEntity(String name, String abbreviation, CityEntity city) {
         this.name = name;
         this.abbreviation = abbreviation;
         this.city = city;
@@ -35,7 +35,7 @@ public class AirportEntity extends BaseEntity {
         return abbreviation;
     }
 
-    public City getCity() {
+    public CityEntity getCity() {
         return city;
     }
 }

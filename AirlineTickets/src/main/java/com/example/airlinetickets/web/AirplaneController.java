@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("airplanes")
+@RequestMapping("/airplanes")
 public class AirplaneController {
 
     private final AirplaneService airplaneService;

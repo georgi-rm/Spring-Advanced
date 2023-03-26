@@ -25,9 +25,9 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/", "/error", "/home", "/api/**", "/airplanes", "/airplanes/details/**").permitAll()
+                .requestMatchers("/", "/error", "/api/**", "/airplanes", "/airplanes/details/**").permitAll()
                 .requestMatchers("/users/login", "/users/register", "/users/login-error").anonymous()
-                .requestMatchers("/airplanes/add").hasRole(UserRoleEnum.MODERATOR.name())
+                .requestMatchers("/airplanes/add", "/cities/add").hasRole(UserRoleEnum.MODERATOR.name())
 //                .requestMatchers("/pages/admins").hasRole(UserRoleEnum.ADMIN.name())
 //                .anyRequest().authenticated()
                 .and()

@@ -19,6 +19,9 @@
                 </li>
             </th:block>
             <th:block sec:authorize="isAuthenticated()">
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                <a class="btn nav-link" href="/cities/add">Add City</a>
+            </li>
             <li class="nav-item" sec:authorize="hasRole('MODERATOR')">
                 <a class="btn nav-link" href="/airplanes/add">Add Airplane</a>
             </li>

@@ -25,7 +25,7 @@ public class UserEntity extends BaseEntity {
     private String email;
 
     @OneToOne
-    private ClubCard clubCard;
+    private ClubCardEntity clubCard;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRoleEntity> roles = new ArrayList<>();
@@ -75,11 +75,11 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    public ClubCard getClubCard() {
+    public ClubCardEntity getClubCard() {
         return clubCard;
     }
 
-    public UserEntity setClubCard(ClubCard clubCard) {
+    public UserEntity setClubCard(ClubCardEntity clubCard) {
         this.clubCard = clubCard;
         return this;
     }

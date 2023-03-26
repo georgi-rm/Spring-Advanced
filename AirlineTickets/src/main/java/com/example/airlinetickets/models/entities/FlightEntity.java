@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "flights")
-public class Flight extends BaseEntity{
+public class FlightEntity extends BaseEntity{
 
     @Column(name = "departure_time", nullable = false)
     private LocalDateTime departureDateTime;
@@ -50,14 +50,14 @@ public class Flight extends BaseEntity{
 
     private String terminal;
 
-    public Flight() {
+    public FlightEntity() {
     }
 
     public LocalDateTime getDepartureDateTime() {
         return departureDateTime;
     }
 
-    public Flight setDepartureDateTime(LocalDateTime departureDateTime) {
+    public FlightEntity setDepartureDateTime(LocalDateTime departureDateTime) {
         this.departureDateTime = departureDateTime;
         return this;
     }
@@ -66,7 +66,7 @@ public class Flight extends BaseEntity{
         return arrivalDateTime;
     }
 
-    public Flight setArrivalDateTime(LocalDateTime arrivalDateTime) {
+    public FlightEntity setArrivalDateTime(LocalDateTime arrivalDateTime) {
         this.arrivalDateTime = arrivalDateTime;
         return this;
     }
@@ -75,7 +75,7 @@ public class Flight extends BaseEntity{
         return originAirportEntity;
     }
 
-    public Flight setOriginAirport(AirportEntity originAirportEntity) {
+    public FlightEntity setOriginAirport(AirportEntity originAirportEntity) {
         this.originAirportEntity = originAirportEntity;
         return this;
     }
@@ -84,7 +84,7 @@ public class Flight extends BaseEntity{
         return destinationAirportEntity;
     }
 
-    public Flight setDestinationAirport(AirportEntity destinationAirportEntity) {
+    public FlightEntity setDestinationAirport(AirportEntity destinationAirportEntity) {
         this.destinationAirportEntity = destinationAirportEntity;
         return this;
     }
@@ -93,7 +93,7 @@ public class Flight extends BaseEntity{
         return distance;
     }
 
-    public Flight setDistance(Integer distance) {
+    public FlightEntity setDistance(Integer distance) {
         this.distance = distance;
         return this;
     }
@@ -102,7 +102,7 @@ public class Flight extends BaseEntity{
         return premiumTicketPrice;
     }
 
-    public Flight setPremiumTicketPrice(BigDecimal premiumTicketPrice) {
+    public FlightEntity setPremiumTicketPrice(BigDecimal premiumTicketPrice) {
         this.premiumTicketPrice = premiumTicketPrice;
         return this;
     }
@@ -111,7 +111,7 @@ public class Flight extends BaseEntity{
         return businessTicketPrice;
     }
 
-    public Flight setBusinessTicketPrice(BigDecimal businessTicketPrice) {
+    public FlightEntity setBusinessTicketPrice(BigDecimal businessTicketPrice) {
         this.businessTicketPrice = businessTicketPrice;
         return this;
     }
@@ -120,7 +120,7 @@ public class Flight extends BaseEntity{
         return economyTicketPrice;
     }
 
-    public Flight setEconomyTicketPrice(BigDecimal economyTicketPrice) {
+    public FlightEntity setEconomyTicketPrice(BigDecimal economyTicketPrice) {
         this.economyTicketPrice = economyTicketPrice;
         return this;
     }
@@ -129,7 +129,7 @@ public class Flight extends BaseEntity{
         return airplaneEntity;
     }
 
-    public Flight setAirplane(AirplaneEntity airplaneEntity) {
+    public FlightEntity setAirplane(AirplaneEntity airplaneEntity) {
         this.airplaneEntity = airplaneEntity;
         return this;
     }
@@ -138,7 +138,7 @@ public class Flight extends BaseEntity{
         return premiumSeats;
     }
 
-    public Flight setPremiumSeats(Integer premiumSeats) {
+    public FlightEntity setPremiumSeats(Integer premiumSeats) {
         this.premiumSeats = premiumSeats;
         return this;
     }
@@ -147,7 +147,7 @@ public class Flight extends BaseEntity{
         return businessSeats;
     }
 
-    public Flight setBusinessSeats(Integer businessSeats) {
+    public FlightEntity setBusinessSeats(Integer businessSeats) {
         this.businessSeats = businessSeats;
         return this;
     }
@@ -156,7 +156,7 @@ public class Flight extends BaseEntity{
         return economySeats;
     }
 
-    public Flight setEconomySeats(Integer economySeats) {
+    public FlightEntity setEconomySeats(Integer economySeats) {
         this.economySeats = economySeats;
         return this;
     }
@@ -165,7 +165,7 @@ public class Flight extends BaseEntity{
         return terminal;
     }
 
-    public Flight setTerminal(String terminal) {
+    public FlightEntity setTerminal(String terminal) {
         this.terminal = terminal;
         return this;
     }

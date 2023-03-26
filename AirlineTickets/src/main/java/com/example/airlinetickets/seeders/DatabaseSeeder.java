@@ -77,15 +77,15 @@ public class DatabaseSeeder implements CommandLineRunner {
             return;
         }
 
-        List<City> cities = new ArrayList<>();
+        List<CityEntity> cities = new ArrayList<>();
 
-        City sofiaCity = new City("Sofia", "Bulgaria");
+        CityEntity sofiaCity = new CityEntity("Sofia", "Bulgaria");
         cities.add(sofiaCity);
 
-        City newYorkCity = new City("New York", "USA");
+        CityEntity newYorkCity = new CityEntity("New York", "USA");
         cities.add(newYorkCity);
 
-        City viennaCity = new City("Vienna", "Austria");
+        CityEntity viennaCity = new CityEntity("Vienna", "Austria");
         cities.add(viennaCity);
 
         this.cityRepository.saveAll(cities);
@@ -135,9 +135,9 @@ public class DatabaseSeeder implements CommandLineRunner {
             return;
         }
 
-        List<Flight> flights = new ArrayList<>();
+        List<FlightEntity> flights = new ArrayList<>();
 
-        Flight flight1 = new Flight().setDepartureDateTime(LocalDateTime.now().plusDays(1))
+        FlightEntity flight1 = new FlightEntity().setDepartureDateTime(LocalDateTime.now().plusDays(1))
                 .setArrivalDateTime(LocalDateTime.now().plusDays(1).plusHours(2))
                 .setOriginAirport(sofiaAirport)
                 .setDestinationAirport(viennaAirport)
@@ -153,7 +153,7 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         flights.add(flight1);
 
-        Flight flight2 = new Flight().setDepartureDateTime(LocalDateTime.now().plusDays(2))
+        FlightEntity flight2 = new FlightEntity().setDepartureDateTime(LocalDateTime.now().plusDays(2))
                 .setArrivalDateTime(LocalDateTime.now().plusDays(2).plusHours(6))
                 .setOriginAirport(viennaAirport)
                 .setDestinationAirport(jfkAirport)

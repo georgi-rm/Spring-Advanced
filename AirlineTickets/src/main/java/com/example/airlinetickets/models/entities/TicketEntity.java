@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tickets")
-public class Ticket extends BaseEntity{
+public class TicketEntity extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "seat_category", nullable = false)
@@ -15,7 +15,7 @@ public class Ticket extends BaseEntity{
     private String seatNumber;
 
     @ManyToOne
-    private Flight flight;
+    private FlightEntity flight;
 
     @ManyToOne
     private UserEntity user;

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Airline Tickets Application</title>
+    <th:block th:replace="~{fragments/head}" />
+</head>
+<body class="body-main">
+<header th:insert="~{fragments/navigation::navigation}"></header>
+<main class="p-5 align-content-center my-register-div">
+
+    <h1 class="text-center text-light">
+        <strong class="pl-3 font-weight-bold">Add New City</strong>
+    </h1>
+
+    <div class="d-flex justify-content-center">
+
+        <form th:action="@{/cities/add}"
+              th:method="post"
+              th:object="${createCityDto}"
+              class="text-light">
+
+            <div class="form-group">
+                <label for="name" class="col-auto col-form-label">Name</label>
+                <div class="col-auto">
+                    <input type="text"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{name}"
+                           id="name"
+                           aria-describedby="nameHelpInline"
+                           placeholder="eg. Sofia">
+                    <small id="nameHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Name must be between 2 and 50 characters.
+                    </small>
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${nameAlreadyExists != null}" >
+                        City with this name already exists.
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="country" class="col-auto col-form-label">Country</label>
+                <div class="col-auto">
+                    <input type="text"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{country}"
+                           id="country"
+                           aria-describedby="countryHelpInline" placeholder="eg. Bulgaria">
+                    <small id="countryHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Country must not be empty
+                    </small>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-2">
+                <button type="submit" class="btn btn-primary">Add City</button>
+            </div>
+        </form>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer}" />
+</body>
+</html>

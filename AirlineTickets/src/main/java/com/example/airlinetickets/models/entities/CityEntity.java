@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "cities")
-public class City extends BaseEntity {
+public class CityEntity extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private String name;
@@ -17,10 +17,10 @@ public class City extends BaseEntity {
     @OneToMany(mappedBy = "city")
     private List<AirportEntity> airports;
 
-    public City() {
+    public CityEntity() {
     }
 
-    public City(String name, String country) {
+    public CityEntity(String name, String country) {
         this.name = name;
         this.country = country;
     }
@@ -29,7 +29,7 @@ public class City extends BaseEntity {
         return name;
     }
 
-    public City setName(String name) {
+    public CityEntity setName(String name) {
         this.name = name;
         return this;
     }
@@ -38,7 +38,7 @@ public class City extends BaseEntity {
         return country;
     }
 
-    public City setCountry(String country) {
+    public CityEntity setCountry(String country) {
         this.country = country;
         return this;
     }
@@ -47,7 +47,7 @@ public class City extends BaseEntity {
         return airports;
     }
 
-    public City setAirports(List<AirportEntity> airports) {
+    public CityEntity setAirports(List<AirportEntity> airports) {
         this.airports = airports;
         return this;
     }

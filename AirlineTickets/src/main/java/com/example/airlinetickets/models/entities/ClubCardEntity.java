@@ -7,7 +7,7 @@ import java.math.BigInteger;
 
 @Entity
 @Table(name = "club_cards")
-public class ClubCard extends BaseEntity {
+public class ClubCardEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String number;
