@@ -56,6 +56,6 @@ public class AirplaneController {
             return "redirect:/airplanes/add";
         }
 
-        return "redirect:/";
+        return "redirect:/airplanes";
     }
 }

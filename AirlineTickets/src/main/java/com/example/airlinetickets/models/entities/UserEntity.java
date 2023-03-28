@@ -97,4 +97,9 @@ public class UserEntity extends BaseEntity {
         this.roles.add(role);
         return this;
     }
+
+    public UserEntity clearAllRoles() {
+        this.roles.clear();
+        return this;
+    }
 }

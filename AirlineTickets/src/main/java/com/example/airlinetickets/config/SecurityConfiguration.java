@@ -28,7 +28,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/", "/error", "/api/**", "/airplanes", "/airplanes/details/**").permitAll()
                 .requestMatchers("/users/login", "/users/register", "/users/login-error").anonymous()
                 .requestMatchers("/airplanes/add", "/cities/add").hasRole(UserRoleEnum.MODERATOR.name())
-//                .requestMatchers("/pages/admins").hasRole(UserRoleEnum.ADMIN.name())
+                .requestMatchers("/admin/**").hasRole(UserRoleEnum.ADMIN.name())
 //                .anyRequest().authenticated()
                 .and()
                 .formLogin()

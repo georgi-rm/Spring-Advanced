@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Airline Tickets Application</title>
+    <th:block th:replace="~{fragments/head}"/>
+</head>
+<body class="body-main">
+<header th:insert="~{fragments/navigation::navigation}"></header>
+<main class="p-5 align-content-center my-register-div">
+
+    <h1 class="text-center text-light">
+        <strong class="pl-3 font-weight-bold">Manage User Roles</strong>
+    </h1>
+
+    <div class="d-flex justify-content-center">
+
+        <table class="text-light table">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Roles</th>
+                <th>Change Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="*{user.username}">Username</td>
+                <td th:text="|*{user.firstName} *{user.lastName}|">Name</td>
+                <td th:text="*{user.email}">E-mail</td>
+                <td>
+                    <div th:each="role : ${user.roles}">
+                        <span th:text="${role.name()}">Role</span>
+                    </div>
+                </td>
+                <td>
+                    <a class="btn btn-link nav-link" th:href="@{/admin/users/{id}(id = ${user.id})}">Change Roles</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer}"/>
+</body>
+</html>
