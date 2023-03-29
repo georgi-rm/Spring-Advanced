@@ -1,5 +1,6 @@
 package com.example.airlinetickets.services;
 
+import com.example.airlinetickets.exceptions.AirportNotFoundException;
 import com.example.airlinetickets.models.dtos.binding.CreateAirportDto;
 import com.example.airlinetickets.models.dtos.view.AirportViewDto;
 import com.example.airlinetickets.models.entities.AirportEntity;
@@ -42,6 +43,17 @@ public class AirportService {
                 .toList();
     }
 
+    public AirportViewDto getAirportById(Long id) {
+
+        Optional<AirportEntity> airportEntity = airportRepository.findById(id);
+
+        if (airportEntity.isEmpty()) {
+            throw new AirportNotFoundException(id);
+        }
+
+        return airportMapper.airportEntityToAirportViewDto(airportEntity.get());
+    }
+
     public boolean isNameUnavailable(String name) {
         Optional<AirportEntity> airportByName = airportRepository.findByName(name);
 
@@ -53,5 +65,10 @@ public class AirportService {
         Optional<AirportEntity> airportByAbbreviation = airportRepository.findByAbbreviation(abbreviation);
 
         return airportByAbbreviation.isPresent();
+    }
+
+    public void deleteAirportById(Long id) {
+
+        airportRepository.deleteById(id);
     }
 }

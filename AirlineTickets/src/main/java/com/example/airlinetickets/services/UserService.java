@@ -5,10 +5,12 @@ import com.example.airlinetickets.models.dtos.binding.UserRegistrationDto;
 import com.example.airlinetickets.models.dtos.UserRolesDto;
 import com.example.airlinetickets.models.entities.UserEntity;
 import com.example.airlinetickets.models.entities.UserRoleEntity;
+import com.example.airlinetickets.models.enums.UserRoleEnum;
 import com.example.airlinetickets.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -129,5 +131,12 @@ public class UserService {
 
         return userRepository.findById(id).map(userEntity -> modelMapper.map(userEntity, UserRolesDto.class));
 
+    }
+
+    public boolean isModerator(UserDetails userDetails) {
+        return userDetails.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .anyMatch(a -> a.equals("ROLE_" + UserRoleEnum.MODERATOR.name()));
     }
 }

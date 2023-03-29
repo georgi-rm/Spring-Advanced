@@ -10,6 +10,8 @@ public class AirportViewDto {
 
     private String imageUrl;
 
+    private String description;
+
     private String city;
 
     private String country;
@@ -47,6 +49,15 @@ public class AirportViewDto {
 
     public AirportViewDto setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public AirportViewDto setDescription(String description) {
+        this.description = description;
         return this;
     }
 

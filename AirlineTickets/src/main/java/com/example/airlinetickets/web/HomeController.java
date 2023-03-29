@@ -22,12 +22,12 @@ public class HomeController {
     }
 
     @ModelAttribute("searchFlightDto")
-    public SearchFlightDto initBattleForm() {
+    public SearchFlightDto initSearchForm() {
         return new SearchFlightDto();
     }
 
     @GetMapping("/")
-    public String loggedOutIndex(Model model) {
+    public String index(Model model) {
         List<AirportViewDto> allAirports = this.airportService.getAllAirports();
         model.addAttribute("allAirports", allAirports);
 

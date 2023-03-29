@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Airline Tickets Application</title>
+    <th:block th:replace="~{fragments/head}"/>
+</head>
+
+<body>
+<div class="wrapper">
+
+    <header th:insert="~{fragments/navigation::navigation}"></header>
+
+    <div th:object="${airport}" class="container-fluid">
+        <h2 class="text-center text-white mt-5" th:text="|*{name} (*{abbreviation})|">Airport Name</h2>
+        <div class="offers row mx-auto d-flex flex-row justify-content-center">
+            <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
+
+                <div class="card-body pb-1">
+                    <h5 class="card-title">
+                        <th:block th:text="|*{city}, *{country}|" /></h5>
+                </div>
+                <ul class="offer-details list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="card-text"><th:block th:text="*{description}"></th:block></div>
+                    </li>
+                </ul>
+                <div class="card-body" sec:authorize="hasRole('MODERATOR')">
+                    <form
+                            th:action="@{/airports/{id}(id=*{id})}"
+                            th:method="DELETE"
+                    >
+                        <input type="submit" name="submit" class="btn btn-primary" value="Delete">
+                    </form>
+                </div>
+
+                <div class="card-body" sec:authorize="hasRole('MODERATOR')">
+                    <a th:href="@{/airports/edit/{id}(id=*{id})}" class="btn btn-primary">
+                        Edit airport
+                    </a>
+                </div>
+            </div>
+            <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
+                <img th:src="*{imageUrl}" class="card-img-top" alt="Car image">
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{fragments/footer}"/>
+
+</body>
+</html>
