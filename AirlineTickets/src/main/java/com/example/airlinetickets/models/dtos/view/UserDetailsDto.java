@@ -1,4 +1,4 @@
-package com.example.airlinetickets.models.dtos;
+package com.example.airlinetickets.models.dtos.view;
 
 import com.example.airlinetickets.models.enums.UserRoleEnum;
 

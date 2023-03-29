@@ -1,6 +1,6 @@
 package com.example.airlinetickets.web;
 
-import com.example.airlinetickets.models.dtos.CreateAirplaneDto;
+import com.example.airlinetickets.models.dtos.binding.CreateAirplaneDto;
 import com.example.airlinetickets.services.AirplaneService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +45,8 @@ public class AirplaneController {
 
     @PostMapping("/add")
     public String airplanesAdd(@Valid CreateAirplaneDto createAirplaneDto,
-                        BindingResult bindingResult,
-                        RedirectAttributes redirectAttributes) {
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors() || !this.airplaneService.create(createAirplaneDto)) {
             redirectAttributes.addFlashAttribute("createAirplaneDto", createAirplaneDto);

@@ -1,4 +1,4 @@
-package com.example.airlinetickets.models.dtos;
+package com.example.airlinetickets.models.dtos.view;
 
 public class AirplaneViewDto {
 

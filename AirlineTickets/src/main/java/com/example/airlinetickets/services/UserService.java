@@ -1,7 +1,7 @@
 package com.example.airlinetickets.services;
 
-import com.example.airlinetickets.models.dtos.UserDetailsDto;
-import com.example.airlinetickets.models.dtos.UserRegistrationDto;
+import com.example.airlinetickets.models.dtos.view.UserDetailsDto;
+import com.example.airlinetickets.models.dtos.binding.UserRegistrationDto;
 import com.example.airlinetickets.models.dtos.UserRolesDto;
 import com.example.airlinetickets.models.entities.UserEntity;
 import com.example.airlinetickets.models.entities.UserRoleEntity;

@@ -1,8 +1,7 @@
 package com.example.airlinetickets.web.rest;
 
-import com.example.airlinetickets.models.dtos.AirplaneDetailsDto;
-import com.example.airlinetickets.models.dtos.AirplaneViewDto;
-import com.example.airlinetickets.models.entities.AirplaneEntity;
+import com.example.airlinetickets.models.dtos.view.AirplaneDetailsViewDto;
+import com.example.airlinetickets.models.dtos.view.AirplaneViewDto;
 import com.example.airlinetickets.services.AirplaneService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +23,9 @@ public class AirplaneRestController {
     }
 
     @GetMapping("/airplanes/details/{airplaneId}")
-    public ResponseEntity<AirplaneDetailsDto> getComments(@PathVariable("airplaneId") Long airplaneId) {
+    public ResponseEntity<AirplaneDetailsViewDto> getComments(@PathVariable("airplaneId") Long airplaneId) {
 
-        Optional<AirplaneDetailsDto> airplane = airplaneService.findAirplaneById(airplaneId);
+        Optional<AirplaneDetailsViewDto> airplane = airplaneService.findAirplaneById(airplaneId);
 
         return airplane.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }

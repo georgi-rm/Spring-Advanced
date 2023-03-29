@@ -1,8 +1,8 @@
 package com.example.airlinetickets.services;
 
-import com.example.airlinetickets.models.dtos.AirplaneDetailsDto;
-import com.example.airlinetickets.models.dtos.AirplaneViewDto;
-import com.example.airlinetickets.models.dtos.CreateAirplaneDto;
+import com.example.airlinetickets.models.dtos.view.AirplaneDetailsViewDto;
+import com.example.airlinetickets.models.dtos.view.AirplaneViewDto;
+import com.example.airlinetickets.models.dtos.binding.CreateAirplaneDto;
 import com.example.airlinetickets.models.entities.AirplaneEntity;
 import com.example.airlinetickets.repositories.AirplaneRepository;
 import org.modelmapper.ModelMapper;
@@ -39,7 +39,7 @@ public class AirplaneService {
         return true;
     }
 
-    public Optional<AirplaneDetailsDto> findAirplaneById(Long airplaneId) {
+    public Optional<AirplaneDetailsViewDto> findAirplaneById(Long airplaneId) {
 
         Optional<AirplaneEntity> airplane = this.airplaneRepository.findById(airplaneId);
 
@@ -47,9 +47,9 @@ public class AirplaneService {
             return Optional.empty();
         }
 
-        AirplaneDetailsDto airplaneDetailsDto = modelMapper.map(airplane.get(), AirplaneDetailsDto.class);
+        AirplaneDetailsViewDto airplaneDetailsViewDto = modelMapper.map(airplane.get(), AirplaneDetailsViewDto.class);
 
-        return Optional.of(airplaneDetailsDto);
+        return Optional.of(airplaneDetailsViewDto);
     }
 
     public List<AirplaneViewDto> getAllAirplanes() {

@@ -1,6 +1,6 @@
 package com.example.airlinetickets.web;
 
-import com.example.airlinetickets.models.dtos.CreateCityDto;
+import com.example.airlinetickets.models.dtos.binding.CreateCityDto;
 import com.example.airlinetickets.services.CityService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

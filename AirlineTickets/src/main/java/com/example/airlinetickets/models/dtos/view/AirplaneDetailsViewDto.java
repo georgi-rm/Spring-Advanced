@@ -1,6 +1,6 @@
-package com.example.airlinetickets.models.dtos;
+package com.example.airlinetickets.models.dtos.view;
 
-public class AirplaneDetailsDto {
+public class AirplaneDetailsViewDto {
 
     private String model;
 
@@ -28,7 +28,7 @@ public class AirplaneDetailsDto {
         return model;
     }
 
-    public AirplaneDetailsDto setModel(String model) {
+    public AirplaneDetailsViewDto setModel(String model) {
         this.model = model;
         return this;
     }
@@ -37,7 +37,7 @@ public class AirplaneDetailsDto {
         return imageUrl;
     }
 
-    public AirplaneDetailsDto setImageUrl(String imageUrl) {
+    public AirplaneDetailsViewDto setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }
@@ -46,7 +46,7 @@ public class AirplaneDetailsDto {
         return maximumSeats;
     }
 
-    public AirplaneDetailsDto setMaximumSeats(Integer maximumSeats) {
+    public AirplaneDetailsViewDto setMaximumSeats(Integer maximumSeats) {
         this.maximumSeats = maximumSeats;
         return this;
     }
@@ -55,7 +55,7 @@ public class AirplaneDetailsDto {
         return length;
     }
 
-    public AirplaneDetailsDto setLength(Double length) {
+    public AirplaneDetailsViewDto setLength(Double length) {
         this.length = length;
         return this;
     }
@@ -64,7 +64,7 @@ public class AirplaneDetailsDto {
         return wingspan;
     }
 
-    public AirplaneDetailsDto setWingspan(Double wingspan) {
+    public AirplaneDetailsViewDto setWingspan(Double wingspan) {
         this.wingspan = wingspan;
         return this;
     }
@@ -73,7 +73,7 @@ public class AirplaneDetailsDto {
         return height;
     }
 
-    public AirplaneDetailsDto setHeight(Double height) {
+    public AirplaneDetailsViewDto setHeight(Double height) {
         this.height = height;
         return this;
     }
@@ -82,7 +82,7 @@ public class AirplaneDetailsDto {
         return maximumWeight;
     }
 
-    public AirplaneDetailsDto setMaximumWeight(Integer maximumWeight) {
+    public AirplaneDetailsViewDto setMaximumWeight(Integer maximumWeight) {
         this.maximumWeight = maximumWeight;
         return this;
     }
@@ -91,7 +91,7 @@ public class AirplaneDetailsDto {
         return maximumCruisingSpeed;
     }
 
-    public AirplaneDetailsDto setMaximumCruisingSpeed(Integer maximumCruisingSpeed) {
+    public AirplaneDetailsViewDto setMaximumCruisingSpeed(Integer maximumCruisingSpeed) {
         this.maximumCruisingSpeed = maximumCruisingSpeed;
         return this;
     }
@@ -100,7 +100,7 @@ public class AirplaneDetailsDto {
         return maximumCruisingAltitude;
     }
 
-    public AirplaneDetailsDto setMaximumCruisingAltitude(Integer maximumCruisingAltitude) {
+    public AirplaneDetailsViewDto setMaximumCruisingAltitude(Integer maximumCruisingAltitude) {
         this.maximumCruisingAltitude = maximumCruisingAltitude;
         return this;
     }
@@ -109,7 +109,7 @@ public class AirplaneDetailsDto {
         return range;
     }
 
-    public AirplaneDetailsDto setRange(Integer range) {
+    public AirplaneDetailsViewDto setRange(Integer range) {
         this.range = range;
         return this;
     }
@@ -118,7 +118,7 @@ public class AirplaneDetailsDto {
         return engines;
     }
 
-    public AirplaneDetailsDto setEngines(Integer engines) {
+    public AirplaneDetailsViewDto setEngines(Integer engines) {
         this.engines = engines;
         return this;
     }

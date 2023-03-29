@@ -1,4 +1,4 @@
-package com.example.airlinetickets.models.dtos;
+package com.example.airlinetickets.models.dtos.binding;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

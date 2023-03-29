@@ -1,7 +1,7 @@
 package com.example.airlinetickets.web;
 
-import com.example.airlinetickets.models.dtos.SearchFlightDto;
-import com.example.airlinetickets.models.entities.AirportEntity;
+import com.example.airlinetickets.models.dtos.binding.SearchFlightDto;
+import com.example.airlinetickets.models.dtos.view.AirportViewDto;
 import com.example.airlinetickets.services.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String loggedOutIndex(Model model) {
-        List<AirportEntity> allAirports = this.airportService.getAllAirports();
+        List<AirportViewDto> allAirports = this.airportService.getAllAirports();
         model.addAttribute("allAirports", allAirports);
 
         return "index";

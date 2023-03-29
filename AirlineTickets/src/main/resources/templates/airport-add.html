@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Airline Tickets Application</title>
+    <th:block th:replace="~{fragments/head}" />
+</head>
+<body class="body-main">
+<header th:insert="~{fragments/navigation::navigation}"></header>
+<main class="p-5 align-content-center my-register-div">
+
+    <h1 class="text-center text-light">
+        <strong class="pl-3 font-weight-bold">Add New Airport</strong>
+    </h1>
+
+    <div class="d-flex justify-content-center">
+
+        <form th:action="@{/airports/add}"
+              th:method="post"
+              th:object="${createAirportDto}"
+              class="text-light">
+
+            <div class="form-group">
+                <label for="name" class="col-auto col-form-label">Name</label>
+                <div class="col-auto">
+                    <input type="text"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{name}"
+                           id="name"
+                           aria-describedby="nameHelpInline" placeholder="Name">
+                    <small id="nameHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Name must be between 3 and 100 characters.
+                    </small>
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${airportNameIsUnavailable != null}" >
+                        Airport with name "<th:block th:text="*{name}"></th:block>" already exists.
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="abbreviation" class="col-auto col-form-label">Abbreviation</label>
+                <div class="col-auto">
+                    <input type="text"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{abbreviation}"
+                           id="abbreviation"
+                           aria-describedby="abbreviationHelpInline" placeholder="Abbreviation">
+                    <small id="abbreviationHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Abbreviation must be exactly 3 characters.
+                    </small>
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${airportAbbreviationIsUnavailable != null}" >
+                        Airport with abbreviation "<th:block th:text="*{abbreviation}"></th:block>" already exists.
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="imageUrl" class="col-auto col-form-label">Image Url</label>
+                <div class="col-auto">
+                    <input type="text"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{imageUrl}"
+                           id="imageUrl"
+                           aria-describedby="imageUrlHelpInline" placeholder="Image Url">
+                    <small id="imageUrlHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Image Url must not be empty.
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="city" class="col-auto col-form-label">City</label>
+                <div class="col-auto">
+                    <select id="city"
+                            class="form-control col-auto"
+                            aria-label="Default select example"
+                            th:errorclass="is-invalid"
+                            th:field="*{cityId}"
+                            aria-describedby="cityHelpInline" >
+                        <option selected th:value = "null">Select City</option>
+                        <option th:each="city: ${allCities}"
+                                th:value="${city.getId()}"
+                                th:text="${city.getName()}"
+                                th:selected="${city.getId()} == *{cityId}" />
+                    </select>
+                    <small id="cityHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Please select city from the list.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="col-auto col-form-label">Description</label>
+                <div class="col-auto">
+                    <textarea name="description"
+                              class="form-control"
+                              th:errorclass="is-invalid"
+                              th:field="*{description}"
+                              id="description"
+                              rows="4"
+                              cols="50"
+                              aria-describedby="descriptionHelpInline" placeholder="Enter description here...">
+                        </textarea>
+                    <small id="descriptionHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Description must not be empty.
+                    </small>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-2">
+                <button type="submit" class="btn btn-primary">Add Airport</button>
+            </div>
+        </form>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer}" />
+</body>
+</html>

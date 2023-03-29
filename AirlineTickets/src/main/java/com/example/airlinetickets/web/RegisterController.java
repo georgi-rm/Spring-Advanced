@@ -1,6 +1,6 @@
 package com.example.airlinetickets.web;
 
-import com.example.airlinetickets.models.dtos.UserRegistrationDto;
+import com.example.airlinetickets.models.dtos.binding.UserRegistrationDto;
 import com.example.airlinetickets.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -36,6 +36,7 @@ public class RegisterController {
     public UserRegistrationDto initRegistrationDto() {
         return new UserRegistrationDto();
     }
+
     @GetMapping("/register")
     public String register() {
         return "register";
@@ -55,7 +56,7 @@ public class RegisterController {
             redirectAttributes.addFlashAttribute("passwordsDoesNotMatch", true);
         }
 
-        if( userService.isEmailRegistered(registrationDto) ) {
+        if (userService.isEmailRegistered(registrationDto)) {
             isValid = false;
             redirectAttributes.addFlashAttribute("emailAlreadyRegistered", true);
         }
