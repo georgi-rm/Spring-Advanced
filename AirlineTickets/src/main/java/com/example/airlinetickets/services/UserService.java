@@ -1,6 +1,5 @@
 package com.example.airlinetickets.services;
 
-
 import com.example.airlinetickets.models.dtos.UserDetailsDto;
 import com.example.airlinetickets.models.dtos.UserRegistrationDto;
 import com.example.airlinetickets.models.dtos.UserRolesDto;
@@ -29,11 +28,16 @@ public class UserService {
 
     private final UserRoleService userRoleService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService, UserRoleService userRoleService) {
+    private final ModelMapper modelMapper;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
+                       UserDetailsService userDetailsService, UserRoleService userRoleService,
+                       ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
         this.userRoleService = userRoleService;
+        this.modelMapper = modelMapper;
     }
 
     public void registerUser(UserRegistrationDto registrationDto,
@@ -110,8 +114,6 @@ public class UserService {
                         .setEmail(e.getEmail())
                         .setRoles(e.getRoles().stream().map(UserRoleEntity::getRole).toList())).toList();
 
-
-//        ModelMapper modelMapper = new ModelMapper();
 //        PropertyMap<UserEntity, UserDetailsDto> roleMap = new PropertyMap<UserEntity, UserDetailsDto>() {
 //            protected void configure() {
 //                map().setRoles(source.getRoles().stream().map(UserRoleEntity::getRole).toList());
@@ -124,7 +126,6 @@ public class UserService {
     }
 
     public Optional<UserRolesDto> getById(Long id) {
-        ModelMapper modelMapper = new ModelMapper();
 
         return userRepository.findById(id).map(userEntity -> modelMapper.map(userEntity, UserRolesDto.class));
 

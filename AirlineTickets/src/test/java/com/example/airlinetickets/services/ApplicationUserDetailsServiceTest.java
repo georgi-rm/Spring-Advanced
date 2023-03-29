@@ -48,7 +48,7 @@ public class ApplicationUserDetailsServiceTest {
         String EXISTING_USERNAME = "george";
         UserEntity testUserEntity = new UserEntity().
                 setUsername(EXISTING_USERNAME).
-                setEmail("test@example.com").
+                setEmail("george@example.com").
                 setPassword("topSecret").
                 setRoles(List.of(testAdminRole, testModeratorRole));
 

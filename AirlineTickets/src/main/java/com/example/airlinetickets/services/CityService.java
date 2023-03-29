@@ -13,8 +13,11 @@ public class CityService {
 
     private final CityRepository cityRepository;
 
-    public CityService(CityRepository cityRepository) {
+    private final ModelMapper modelMapper;
+
+    public CityService(CityRepository cityRepository, ModelMapper modelMapper) {
         this.cityRepository = cityRepository;
+        this.modelMapper = modelMapper;
     }
 
     public boolean create(CreateCityDto createCityDto) {
@@ -23,8 +26,6 @@ public class CityService {
         if (cityFound.isPresent()) {
             return false;
         }
-
-        ModelMapper modelMapper = new ModelMapper();
 
         CityEntity cityEntity = modelMapper.map(createCityDto, CityEntity.class);
 

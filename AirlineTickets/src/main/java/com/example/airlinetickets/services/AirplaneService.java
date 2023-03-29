@@ -15,8 +15,12 @@ import java.util.Optional;
 public class AirplaneService {
 
     private final AirplaneRepository airplaneRepository;
-    public AirplaneService(AirplaneRepository airplaneRepository) {
+
+    private final ModelMapper modelMapper;
+
+    public AirplaneService(AirplaneRepository airplaneRepository, ModelMapper modelMapper) {
         this.airplaneRepository = airplaneRepository;
+        this.modelMapper = modelMapper;
     }
 
     public boolean create(CreateAirplaneDto createAirplaneDto) {
@@ -28,8 +32,6 @@ public class AirplaneService {
             return false;
         }
 
-        ModelMapper modelMapper = new ModelMapper();
-
         AirplaneEntity airplaneEntity = modelMapper.map(createAirplaneDto, AirplaneEntity.class);
 
         this.airplaneRepository.save(airplaneEntity);
@@ -38,7 +40,6 @@ public class AirplaneService {
     }
 
     public Optional<AirplaneDetailsDto> findAirplaneById(Long airplaneId) {
-        ModelMapper modelMapper = new ModelMapper();
 
         Optional<AirplaneEntity> airplane = this.airplaneRepository.findById(airplaneId);
 
@@ -53,9 +54,7 @@ public class AirplaneService {
 
     public List<AirplaneViewDto> getAllAirplanes() {
 
-        ModelMapper modelMapper = new ModelMapper();
-
-        List<AirplaneEntity> allAirplanes= this.airplaneRepository.findAll();
+        List<AirplaneEntity> allAirplanes = this.airplaneRepository.findAll();
 
         return allAirplanes.stream().map(e -> modelMapper.map(e, AirplaneViewDto.class)).toList();
     }
