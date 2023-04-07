@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Airline Tickets Application</title>
+    <th:block th:replace="~{fragments/head}" />
+</head>
+<body class="body-main">
+<header th:insert="~{fragments/navigation::navigation}"></header>
+<main class="p-5 align-content-center my-register-div">
+
+    <h1 class="text-center text-light">
+        <strong class="pl-3 font-weight-bold">Add New Airport</strong>
+    </h1>
+
+    <div class="d-flex justify-content-center">
+
+        <form th:action="@{/flights/add}"
+              th:method="post"
+              th:object="${createFlightDto}"
+              class="text-light">
+
+            <div class="form-group">
+                <label for="flightNumber" class="col-auto col-form-label">Flight number</label>
+                <div class="col-auto">
+                    <input type="text"
+                           id="flightNumber"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{flightNumber}"
+                           aria-describedby="flightNumberHelpInline" placeholder="eg. LZ830">
+                    <small id="flightNumberHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Flight number must be between 3 and 10 characters.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="originAirportId" class="col-auto col-form-label">Origin airport</label>
+                <div class="col-auto">
+                    <select id="originAirportId"
+                            class="form-control col-auto"
+                            aria-label="Default select example"
+                            th:errorclass="is-invalid"
+                            th:field="*{originAirportId}"
+                            aria-describedby="originAirportHelpInline" >
+                        <option selected th:value = "null">Select origin airport</option>
+                        <option th:each="airport: ${allAirports}"
+                                th:value="${airport.getId()}"
+                                th:text="|${airport.getName()} (${airport.getAbbreviation()})|"
+                                th:selected="${airport.getId()} == *{originAirportId}" />
+                    </select>
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${airportOriginAndDestinationAreTheSame != null}" >
+                        Airport of origin is the same as airport of destination.
+                    </small>
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${airportOriginDoesNotExist != null}" >
+                        Airport of origin does not exist.
+                    </small>
+                    <small id="originAirportHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Please select airport from the list.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="destinationAirportId" class="col-auto col-form-label">Destination airport</label>
+                <div class="col-auto">
+                    <select id="destinationAirportId"
+                            class="form-control col-auto"
+                            aria-label="Default select example"
+                            th:errorclass="is-invalid"
+                            th:field="*{destinationAirportId}"
+                            aria-describedby="destinationAirportHelpInline" >
+                        <option selected th:value = "null">Select destination airport</option>
+                        <option th:each="airport: ${allAirports}"
+                                th:value="${airport.getId()}"
+                                th:text="|${airport.getName()} (${airport.getAbbreviation()})|"
+                                th:selected="${airport.getId()} == *{destinationAirportId}" />
+                    </select>
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${airportOriginAndDestinationAreTheSame != null}" >
+                        Airport of destination is the same as airport of origin.
+                    </small>
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${airportDestinationDoesNotExist != null}" >
+                        Airport of destination does not exist.
+                    </small>
+                    <small id="destinationAirportHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Please select airport from the list.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="departure-date-time" class="col-auto col-form-label">Departure date and time</label>
+                <div class="col-auto">
+                    <input type="datetime-local"
+                           id="departure-date-time"
+                           step="60"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{departureDateTime}"
+                           required
+                           aria-describedby="departure-date-time-help-inline">
+
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${departureDateIsBeforeCurrentDate != null}" >
+                        Departure date and time is before current date and time.
+                    </small>
+
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${departureDateIsAfterArrivalDate != null}" >
+                        Departure date and time is after arrival date and time.
+                    </small>
+
+                    <small id="departure-date-time-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Choose departure date and time.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="arrival-date-time" class="col-auto col-form-label">Arrival date and time</label>
+                <div class="col-auto">
+                    <input type="datetime-local"
+                           id="arrival-date-time"
+                           step="60"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{arrivalDateTime}"
+                           required
+                           aria-describedby="arrival-date-time-help-inline">
+
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${arrivalDateIsBeforeCurrentDate != null}" >
+                        Arrival date and time is before current date and time.
+                    </small>
+
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${departureDateIsAfterArrivalDate != null}" >
+                        Departure date and time is after arrival date and time.
+                    </small>
+
+                    <small id="arrival-date-time-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Choose arrival date and time.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="airplaneId" class="col-auto col-form-label">Airplane</label>
+                <div class="col-auto">
+                    <select id="airplaneId"
+                            class="form-control col-auto"
+                            aria-label="Default select example"
+                            th:errorclass="is-invalid"
+                            th:field="*{airplaneId}"
+                            aria-describedby="airplaneHelpInline" >
+                        <option selected th:value = "null">Select airplane</option>
+                        <option th:each="airplane: ${allAirplanes}"
+                                th:value="${airplane.getId()}"
+                                th:text="${airplane.getModel()}"
+                                th:selected="${airplane.getId()} == *{airplaneId}" />
+                    </select>
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${airplaneDoesNotExist != null}" >
+                        Airplane does not exist.
+                    </small>
+                    <small id="airplaneHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Please select airplane from the list.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="distance" class="col-auto col-form-label">Distance</label>
+                <div class="col-auto">
+                    <input type="number"
+                           id="distance"
+                           step="1"
+                           min="1"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{distance}"
+                           aria-describedby="distanceHelpInline">
+                    <small id="distanceHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
+                        The distance must be positive.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="premium-seats" class="col-auto col-form-label">Premium seats</label>
+                <div class="col-auto">
+                    <input type="number"
+                           id="premium-seats"
+                           step="1"
+                           min="0"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{premiumSeats}"
+                           aria-describedby="premium-seats-help-inline">
+                    <small id="premium-seats-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Premium seats must be positive.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="premium-ticket-price" class="col-auto col-form-label">Price of premium ticket</label>
+                <div class="col-auto">
+                    <input type="number"
+                           id="premium-ticket-price"
+                           step="0.01"
+                           min="0"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{premiumTicketPrice}"
+                           aria-describedby="premium-ticket-price-help-inline">
+                    <small id="premium-ticket-price-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Premium ticket price must be positive or zero.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="business-seats" class="col-auto col-form-label">Business seats</label>
+                <div class="col-auto">
+                    <input type="number"
+                           id="business-seats"
+                           step="1"
+                           min="0"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{businessSeats}"
+                           aria-describedby="business-seats-help-inline">
+                    <small id="business-seats-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Business seats must be positive.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="business-ticket-price" class="col-auto col-form-label">Business of premium ticket</label>
+                <div class="col-auto">
+                    <input type="number"
+                           id="business-ticket-price"
+                           step="0.01"
+                           min="0"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{businessTicketPrice}"
+                           aria-describedby="business-ticket-price-help-inline">
+                    <small id="business-ticket-price-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Business ticket price must be positive or zero.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="economy-seats" class="col-auto col-form-label">Economy seats</label>
+                <div class="col-auto">
+                    <input type="number"
+                           id="economy-seats"
+                           step="1"
+                           min="0"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{economySeats}"
+                           aria-describedby="economy-seats-help-inline">
+                    <small id="economy-seats-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Economy seats must be positive.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="economy-ticket-price" class="col-auto col-form-label">Economy of premium ticket</label>
+                <div class="col-auto">
+                    <input type="number"
+                           id="economy-ticket-price"
+                           step="0.01"
+                           min="0"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{economyTicketPrice}"
+                           aria-describedby="economy-ticket-price-help-inline">
+                    <small id="economy-ticket-price-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Economy ticket price must be positive or zero.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="terminal" class="col-auto col-form-label">Terminal</label>
+                <div class="col-auto">
+                    <input type="text"
+                           id="terminal"
+                           class="form-control"
+                           th:errorclass="is-invalid"
+                           th:field="*{terminal}"
+                           aria-describedby="terminal-help-inline" placeholder="Terminal">
+                    <small id="terminal-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                        Terminal must be between 1 and 10 characters.
+                    </small>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-2">
+                <button type="submit" class="btn btn-primary">Add Flight</button>
+            </div>
+        </form>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer}" />
+</body>
+</html>

@@ -31,7 +31,6 @@ public class AirportController {
 
     private final FlightService flightService;
 
-
     public AirportController(AirportService airportService, CityService cityService,
                              FlightService flightService) {
         this.airportService = airportService;
@@ -90,6 +89,11 @@ public class AirportController {
             redirectAttributes.addFlashAttribute("airportAbbreviationIsUnavailable", true);
         }
 
+        if (cityService.isCityMissing(createAirportDto.getCityId())) {
+            isValid = false;
+            redirectAttributes.addFlashAttribute("cityDoesNotExist", true);
+        }
+
         if (bindingResult.hasErrors() || !isValid) {
             redirectAttributes.addFlashAttribute("createAirportDto", createAirportDto);
             redirectAttributes.addFlashAttribute(
@@ -103,7 +107,7 @@ public class AirportController {
         return "redirect:/airports";
     }
 
-    @PreAuthorize("@userService.isModerator(#userDetails)")
+    @PreAuthorize("@airportService.isModerator(#userDetails)")
     @DeleteMapping("/{id}")
     public String deleteAirport(
             @AuthenticationPrincipal UserDetails userDetails,

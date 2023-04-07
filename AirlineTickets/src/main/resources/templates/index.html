@@ -28,7 +28,7 @@
                             <option selected th:value = "null">Select Airport from</option>
                             <option th:each="airport: ${allAirports}"
                                     th:value="${airport.getId()}"
-                                    th:text="${airport.getName()}"
+                                    th:text="|${airport.getName()} (${airport.getAbbreviation()})|"
                                     th:selected="${e} == *{originAirportId}" />
                         </select>
                     </div>
@@ -38,7 +38,7 @@
                             <option selected th:value = "null">Select Airport to</option>
                             <option th:each="airport: ${allAirports}"
                                     th:value="${airport.getId()}"
-                                    th:text="${airport.getName()}"
+                                    th:text="|${airport.getName()} (${airport.getAbbreviation()})|"
                                     th:selected="${e} == *{destinationAirportId}" />
                         </select>
                     </div>

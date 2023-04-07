@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Airline Tickets Application</title>
+    <th:block th:replace="~{fragments/head}"/>
+</head>
+<body class="body-main">
+<header th:insert="~{fragments/navigation::navigation}"></header>
+<main class="p-5 align-content-center my-register-div">
+
+    <h1 class="text-center text-light">
+        <strong class="pl-3 font-weight-bold">All flights</strong>
+    </h1>
+
+    <div class="d-flex justify-content-center">
+
+        <table class="text-light table">
+            <thead>
+            <tr>
+                <th>Flight number</th>
+                <th>Origin airport</th>
+                <th>Destination airport</th>
+                <th>Airplane model</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="flight : ${allFlights}">
+                <td th:text="*{flight.flightNumber}">Flight number</td>
+                <td th:text="*{flight.originAirport}">Origin airport</td>
+                <td th:text="*{flight.destinationAirport}">Destination airport</td>
+                <td th:text="*{flight.airplaneModel}">Airplane model</td>
+                <td th:text="${#temporals.format(flight.departureDateTime, 'dd-MM-yyyy HH:mm')}">Departure</td>
+                <td th:text="${#temporals.format(flight.arrivalDateTime, 'dd-MM-yyyy HH:mm')}">Arrival</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer}"/>
+</body>
+</html>

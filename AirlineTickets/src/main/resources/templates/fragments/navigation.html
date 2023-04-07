@@ -16,6 +16,9 @@
             <li class="nav-item">
                 <a class="btn nav-link" th:href="@{/airports}">Airports</a>
             </li>
+            <li class="nav-item">
+                <a class="btn nav-link" th:href="@{/flights}">Flights</a>
+            </li>
             <th:block sec:authorize="!isAuthenticated()">
                 <li class="nav-item">
                     <a class="btn nav-link" th:href="@{/users/login}">Login</a>
@@ -33,6 +36,9 @@
             </li>
             <li class="nav-item" sec:authorize="hasRole('MODERATOR')">
                 <a class="btn nav-link" th:href="@{/airports/add}">Add Airport</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('MODERATOR')">
+                <a class="btn nav-link" th:href="@{/flights/add}">Add Flight</a>
             </li>
             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                 <a class="btn nav-link" th:href="@{/admin/users}">User Roles</a>

@@ -84,6 +84,10 @@
                                 th:text="${city.getName()}"
                                 th:selected="${city.getId()} == *{cityId}" />
                     </select>
+                    <small class="alert alert-danger form-text rounded col-auto"
+                           th:if="${cityDoesNotExist != null}" >
+                        City does not exist.
+                    </small>
                     <small id="cityHelpInline" class="alert alert-danger form-text rounded invalid-feedback">
                         Please select city from the list.
                     </small>

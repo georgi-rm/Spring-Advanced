@@ -10,7 +10,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "flights")
-public class FlightEntity extends BaseEntity{
+public class FlightEntity extends BaseEntity {
+
+    @Column(name = "flight_number", nullable = false)
+    private String flightNumber;
 
     @Column(name = "departure_time", nullable = false)
     private LocalDateTime departureDateTime;
@@ -24,6 +27,9 @@ public class FlightEntity extends BaseEntity{
     @ManyToOne
     private AirportEntity destinationAirportEntity;
 
+    @ManyToOne
+    private AirplaneEntity airplaneEntity;
+
     @Column(nullable = false)
     private Integer distance;
 
@@ -35,9 +41,6 @@ public class FlightEntity extends BaseEntity{
 
     @Column(name = "economy_ticket_price")
     private BigDecimal economyTicketPrice;
-
-    @ManyToOne
-    private AirplaneEntity airplaneEntity;
 
     @Column(name = "premium_seats", nullable = false)
     private Integer premiumSeats;
@@ -51,6 +54,15 @@ public class FlightEntity extends BaseEntity{
     private String terminal;
 
     public FlightEntity() {
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public FlightEntity setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+        return this;
     }
 
     public LocalDateTime getDepartureDateTime() {
@@ -71,21 +83,30 @@ public class FlightEntity extends BaseEntity{
         return this;
     }
 
-    public AirportEntity getOriginAirport() {
+    public AirportEntity getOriginAirportEntity() {
         return originAirportEntity;
     }
 
-    public FlightEntity setOriginAirport(AirportEntity originAirportEntity) {
+    public FlightEntity setOriginAirportEntity(AirportEntity originAirportEntity) {
         this.originAirportEntity = originAirportEntity;
         return this;
     }
 
-    public AirportEntity getDestinationAirport() {
+    public AirportEntity getDestinationAirportEntity() {
         return destinationAirportEntity;
     }
 
-    public FlightEntity setDestinationAirport(AirportEntity destinationAirportEntity) {
+    public FlightEntity setDestinationAirportEntity(AirportEntity destinationAirportEntity) {
         this.destinationAirportEntity = destinationAirportEntity;
+        return this;
+    }
+
+    public AirplaneEntity getAirplaneEntity() {
+        return airplaneEntity;
+    }
+
+    public FlightEntity setAirplaneEntity(AirplaneEntity airplaneEntity) {
+        this.airplaneEntity = airplaneEntity;
         return this;
     }
 
@@ -122,15 +143,6 @@ public class FlightEntity extends BaseEntity{
 
     public FlightEntity setEconomyTicketPrice(BigDecimal economyTicketPrice) {
         this.economyTicketPrice = economyTicketPrice;
-        return this;
-    }
-
-    public AirplaneEntity getAirplane() {
-        return airplaneEntity;
-    }
-
-    public FlightEntity setAirplane(AirplaneEntity airplaneEntity) {
-        this.airplaneEntity = airplaneEntity;
         return this;
     }
 

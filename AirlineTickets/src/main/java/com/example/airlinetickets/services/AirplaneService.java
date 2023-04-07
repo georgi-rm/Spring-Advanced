@@ -58,4 +58,10 @@ public class AirplaneService {
 
         return allAirplanes.stream().map(e -> modelMapper.map(e, AirplaneViewDto.class)).toList();
     }
+
+    public boolean isAirplaneMissing(Long airplaneId) {
+        Optional<AirplaneEntity> airplaneEntity = airplaneRepository.findById(airplaneId);
+
+        return airplaneEntity.isEmpty();
+    }
 }

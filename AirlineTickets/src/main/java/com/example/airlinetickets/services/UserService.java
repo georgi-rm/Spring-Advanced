@@ -132,11 +132,4 @@ public class UserService {
         return userRepository.findById(id).map(userEntity -> modelMapper.map(userEntity, UserRolesDto.class));
 
     }
-
-    public boolean isModerator(UserDetails userDetails) {
-        return userDetails.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .anyMatch(a -> a.equals("ROLE_" + UserRoleEnum.MODERATOR.name()));
-    }
 }

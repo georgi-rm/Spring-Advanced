@@ -42,4 +42,8 @@ public class CityService {
                 .map(e -> modelMapper.map(e, CityDto.class))
                 .toList();
     }
+
+    public boolean isCityMissing(Long cityId) {
+        return cityRepository.findById(cityId).isEmpty();
+    }
 }
