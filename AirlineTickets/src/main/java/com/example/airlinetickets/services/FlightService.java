@@ -9,6 +9,7 @@ import com.example.airlinetickets.models.mapper.FlightMapper;
 import com.example.airlinetickets.repositories.FlightRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -65,5 +66,13 @@ public class FlightService {
                 .toList();
 
         return !flights.isEmpty();
+    }
+
+    public List<FlightEntity> getAllPassedFlights() {
+        return flightRepository.findAllByDepartureDateTimeBefore(LocalDateTime.now());
+    }
+
+    public void deleteById(Long id) {
+        flightRepository.deleteById(id);
     }
 }

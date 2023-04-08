@@ -10,4 +10,6 @@ import java.util.List;
 public interface TicketRepository extends JpaRepository<TicketEntity, Long> {
 
     List<TicketEntity> findAllByUserUsername(String username);
+
+    List<TicketEntity> findAllByFlightId(Long flightId);
 }

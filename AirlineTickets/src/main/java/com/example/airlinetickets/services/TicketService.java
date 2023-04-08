@@ -58,4 +58,8 @@ public class TicketService {
 
         ticketRepository.delete(ticketEntity.get());
     }
+
+    public void deleteAllTicketsByFlightId(Long id) {
+        ticketRepository.deleteAll(ticketRepository.findAllByFlightId(id));
+    }
 }
