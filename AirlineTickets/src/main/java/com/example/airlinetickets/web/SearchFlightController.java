@@ -6,6 +6,7 @@ import com.example.airlinetickets.models.dtos.view.FlightViewDto;
 import com.example.airlinetickets.services.AirportService;
 import com.example.airlinetickets.services.FlightService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,7 @@ public class SearchFlightController {
 
     private final AirportService airportService;
 
+    @Autowired
     public SearchFlightController(FlightService flightService, AirportService airportService) {
         this.flightService = flightService;
         this.airportService = airportService;

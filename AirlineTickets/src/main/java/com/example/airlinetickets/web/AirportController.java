@@ -8,12 +8,9 @@ import com.example.airlinetickets.models.dtos.view.AirportViewDto;
 import com.example.airlinetickets.services.AirportService;
 import com.example.airlinetickets.services.CityService;
 import com.example.airlinetickets.services.FlightService;
-import com.example.airlinetickets.services.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +28,7 @@ public class AirportController {
 
     private final FlightService flightService;
 
+    @Autowired
     public AirportController(AirportService airportService, CityService cityService,
                              FlightService flightService) {
         this.airportService = airportService;

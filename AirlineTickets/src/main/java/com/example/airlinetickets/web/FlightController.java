@@ -10,6 +10,7 @@ import com.example.airlinetickets.services.AirplaneService;
 import com.example.airlinetickets.services.AirportService;
 import com.example.airlinetickets.services.FlightService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,7 @@ public class FlightController {
 
     private final AirplaneService airplaneService;
 
+    @Autowired
     public FlightController(FlightService flightService, AirportService airportService, AirplaneService airplaneService) {
         this.flightService = flightService;
         this.airportService = airportService;
