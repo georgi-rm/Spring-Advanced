@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tickets")
-public class TicketEntity extends BaseEntity{
+public class TicketEntity extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "seat_category", nullable = false)
@@ -20,4 +20,39 @@ public class TicketEntity extends BaseEntity{
     @ManyToOne
     private UserEntity user;
 
+    public SeatCategory getSeatCategory() {
+        return seatCategory;
+    }
+
+    public TicketEntity setSeatCategory(SeatCategory seatCategory) {
+        this.seatCategory = seatCategory;
+        return this;
+    }
+
+    public String getSeatNumber() {
+        return seatNumber;
+    }
+
+    public TicketEntity setSeatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
+        return this;
+    }
+
+    public FlightEntity getFlight() {
+        return flight;
+    }
+
+    public TicketEntity setFlight(FlightEntity flight) {
+        this.flight = flight;
+        return this;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public TicketEntity setUser(UserEntity user) {
+        this.user = user;
+        return this;
+    }
 }

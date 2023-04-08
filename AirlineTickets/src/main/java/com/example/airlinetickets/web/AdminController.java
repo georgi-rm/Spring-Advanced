@@ -41,7 +41,7 @@ public class AdminController {
     public String seeAllUsers(@PathVariable("id") Long id,
                               Model model) {
 
-        Optional<UserRolesDto> userRolesDtoOptional = userService.getById(id);
+        Optional<UserRolesDto> userRolesDtoOptional = userService.getUserRolesById(id);
 
         if (userRolesDtoOptional.isEmpty()) {
             return "redirect:/admin/users";

@@ -107,11 +107,8 @@ public class AirportController {
         return "redirect:/airports";
     }
 
-    @PreAuthorize("@airportService.isModerator(#userDetails)")
     @DeleteMapping("/{id}")
-    public String deleteAirport(
-            @AuthenticationPrincipal UserDetails userDetails,
-            @PathVariable("id") Long id) {
+    public String deleteAirport(@PathVariable("id") Long id) {
 
         if (flightService.hasFlightsFromToAirportWithId(id)) {
             throw new AirportInUseException(id);

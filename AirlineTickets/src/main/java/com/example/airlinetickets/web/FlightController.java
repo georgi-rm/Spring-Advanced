@@ -42,7 +42,8 @@ public class FlightController {
     public String flights(Model model) {
 
         List<FlightViewDto> allFlights = this.flightService.getAllFlights();
-        model.addAttribute("allFlights", allFlights);
+        model.addAttribute("title", "All flights");
+        model.addAttribute("foundFlights", allFlights);
 
         return "flights";
     }

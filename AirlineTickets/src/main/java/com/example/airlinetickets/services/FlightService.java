@@ -1,6 +1,8 @@
 package com.example.airlinetickets.services;
 
+import com.example.airlinetickets.exceptions.FlightNotFoundException;
 import com.example.airlinetickets.models.dtos.binding.CreateFlightDto;
+import com.example.airlinetickets.models.dtos.binding.SearchFlightDto;
 import com.example.airlinetickets.models.dtos.view.FlightViewDto;
 import com.example.airlinetickets.models.entities.FlightEntity;
 import com.example.airlinetickets.models.mapper.FlightMapper;
@@ -34,6 +36,25 @@ public class FlightService {
         FlightEntity flightEntity = flightMapper.createFlightDtoToFlightEntity(createFlightDto);
 
         flightRepository.save(flightEntity);
+    }
+
+    public List<FlightViewDto> searchFlights(SearchFlightDto searchFlightDto) {
+
+        List<FlightEntity> flightEntityList = flightRepository.findAllByOriginAirportEntityIdAndDestinationAirportEntityIdAndDepartureDateTimeBetween(
+                searchFlightDto.getOriginAirportId(),
+                searchFlightDto.getDestinationAirportId(),
+                searchFlightDto.getDepartureDate().atStartOfDay(),
+                searchFlightDto.getDepartureDate().plusDays(1).atStartOfDay());
+
+        return flightEntityList.stream().map(flightMapper::flightEntityToFlightViewDto).toList();
+    }
+
+    public FlightViewDto getFlightById(Long id) {
+
+        return flightRepository
+                .findById(id)
+                .map(flightMapper::flightEntityToFlightViewDto)
+                .orElseThrow(() -> new FlightNotFoundException(id));
     }
 
     public boolean hasFlightsFromToAirportWithId(Long airportId) {

@@ -3,6 +3,9 @@ package com.example.airlinetickets.models.dtos.view;
 import java.time.LocalDateTime;
 
 public class FlightViewDto {
+
+    private Long id;
+
     private String flightNumber;
 
     private LocalDateTime departureDateTime;
@@ -14,6 +17,15 @@ public class FlightViewDto {
     private String destinationAirport;
 
     private String airplaneModel;
+
+    public Long getId() {
+        return id;
+    }
+
+    public FlightViewDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getFlightNumber() {
         return flightNumber;

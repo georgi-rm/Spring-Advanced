@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Airline Tickets Application</title>
+    <th:block th:replace="~{fragments/head}"/>
+</head>
+<body class="body-main">
+<header th:insert="~{fragments/navigation::navigation}"></header>
+<main class="p-5 align-content-center my-register-div">
+
+    <h1 class="text-center text-light">
+        <strong class="pl-3 font-weight-bold">My tickets</strong>
+    </h1>
+
+    <div class="d-flex justify-content-center">
+
+        <th:block th:if="${ticketViewDtoList.isEmpty()}">
+            <h3 class="text-light">You do not have any tickets</h3>
+        </th:block>
+        <table class="text-light table" th:unless="${ticketViewDtoList.isEmpty()}">
+            <thead>
+            <tr>
+                <th>Ticket type</th>
+                <th>Seat</th>
+                <th>Passenger</th>
+                <th>Flight number</th>
+                <th>Origin airport</th>
+                <th>Destination airport</th>
+                <th>Airplane model</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th sec:authorize="isAuthenticated()">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ticket : ${ticketViewDtoList}">
+                <td th:text="*{ticket.seatCategory}">Ticket type</td>
+                <td th:text="*{ticket.seatNumber}">Seat</td>
+                <td th:text="*{ticket.passengerName}">Passenger</td>
+                <td th:text="*{ticket.flight.flightNumber}">Flight number</td>
+                <td th:text="*{ticket.flight.originAirport}">Origin airport</td>
+                <td th:text="*{ticket.flight.destinationAirport}">Destination airport</td>
+                <td th:text="*{ticket.flight.airplaneModel}">Airplane model</td>
+                <td th:text="${#temporals.format(ticket.flight.departureDateTime, 'dd-MM-yyyy HH:mm')}">Departure</td>
+                <td th:text="${#temporals.format(ticket.flight.arrivalDateTime, 'dd-MM-yyyy HH:mm')}">Arrival</td>
+                <td sec:authorize="isAuthenticated()">
+                    <form
+                            th:action="@{/tickets/delete/{id}(id=*{ticket.id})}"
+                            th:method="DELETE"
+                    >
+                        <input type="submit" name="submit" class="btn btn-primary" value="Delete">
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer}"/>
+</body>
+</html>

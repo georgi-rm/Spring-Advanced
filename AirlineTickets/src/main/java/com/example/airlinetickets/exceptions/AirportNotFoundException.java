@@ -6,7 +6,7 @@ public class AirportNotFoundException extends RuntimeException {
 
     public AirportNotFoundException(Long airportId) {
 
-        super("Airport with ID: " + airportId + " not found !");
+        super("Airport with ID: " + airportId + " was not found !");
 
         this.airportId = airportId;
     }

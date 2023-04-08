@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 public class CreateFlightDto {
 
-
     @NotBlank
     @Size(min = 3, max = 10)
     private String flightNumber;

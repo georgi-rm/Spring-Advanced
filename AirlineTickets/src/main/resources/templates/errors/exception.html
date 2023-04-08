@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Airline Tickets Application</title>
+    <th:block th:replace="~{fragments/head}"/>
+</head>
+
+<body>
+<div class="wrapper">
+
+    <header th:insert="~{fragments/navigation::navigation}"></header>
+
+    <div class="container-fluid">
+        <h2 class="text-center text-white mt-5">Exception</h2>
+        <div class="text-light row mx-auto d-flex flex-row justify-content-center">
+            <th:block th:text="${exceptionText}"/>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{fragments/footer}"/>
+
+</body>
+</html>

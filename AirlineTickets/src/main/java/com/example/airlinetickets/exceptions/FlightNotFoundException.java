@@ -6,7 +6,7 @@ public class FlightNotFoundException extends RuntimeException {
 
     public FlightNotFoundException(Long flightId) {
 
-        super("Flight with ID: " + flightId + " not found !");
+        super("Flight with ID: " + flightId + " was not found !");
 
         this.flightId = flightId;
     }

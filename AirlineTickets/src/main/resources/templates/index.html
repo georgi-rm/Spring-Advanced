@@ -17,30 +17,78 @@
         <div class="showcase">
             <h1>Find amazing destinations</h1>
             <p>Be inspired by our offers and fly with us to the most beautiful destinations worldwide.</p>
-            <form th:action="@{/search}"
+            <form th:action="@{/flights/search}"
                   th:method="post"
                   th:object="${searchFlightDto}"
                   class="text-light">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="location-from">From</label>
-                        <select id="location-from" class="form-control" aria-label="Default select example" th:field="*{originAirportId}">
+                        <select id="location-from"
+                                class="form-control"
+                                aria-label="Default select example"
+                                th:errorclass="is-invalid"
+                                th:field="*{originAirportId}"
+                                aria-describedby="location-from-help-inline">
                             <option selected th:value = "null">Select Airport from</option>
                             <option th:each="airport: ${allAirports}"
                                     th:value="${airport.getId()}"
                                     th:text="|${airport.getName()} (${airport.getAbbreviation()})|"
-                                    th:selected="${e} == *{originAirportId}" />
+                                    th:selected="${airport.getId()} == *{originAirportId}" />
                         </select>
+
+                        <small class="alert alert-danger form-text rounded col-auto"
+                               th:if="${airportOriginAndDestinationAreTheSame != null}" >
+                            Airport of origin is the same as airport of destination.
+                        </small>
+
+                        <small id="location-from-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                            Please select airport from the list.
+                        </small>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="location-to">To</label>
-                        <select id="location-to" class="form-control" aria-label="Default select example" th:field="*{destinationAirportId}">
+                        <select id="location-to"
+                                class="form-control"
+                                aria-label="Default select example"
+                                th:errorclass="is-invalid"
+                                th:field="*{destinationAirportId}"
+                                aria-describedby="location-to-help-inline">
                             <option selected th:value = "null">Select Airport to</option>
                             <option th:each="airport: ${allAirports}"
                                     th:value="${airport.getId()}"
                                     th:text="|${airport.getName()} (${airport.getAbbreviation()})|"
-                                    th:selected="${e} == *{destinationAirportId}" />
+                                    th:selected="${airport.getId()} == *{destinationAirportId}" />
                         </select>
+
+                        <small class="alert alert-danger form-text rounded col-auto"
+                               th:if="${airportOriginAndDestinationAreTheSame != null}" >
+                            Airport of destination is the same as airport of origin.
+                        </small>
+
+                        <small id="location-to-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                            Please select airport from the list.
+                        </small>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="departure-date">Date</label>
+                        <input type="date"
+                               id="departure-date"
+                               class="form-control"
+                               th:errorclass="is-invalid"
+                               th:field="*{departureDate}"
+                               aria-describedby="departure-date-help-inline">
+
+                        <small class="alert alert-danger form-text rounded col-auto"
+                               th:if="${departureDateIsBeforeCurrentDate != null}" >
+                            Departure date is before current date.
+                        </small>
+
+                        <small id="departure-date-help-inline" class="alert alert-danger form-text rounded invalid-feedback">
+                            Choose departure date.
+                        </small>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Search flights</button>
@@ -74,18 +122,18 @@
                 <p>Check all available airports</p>
             </div>
         </a>
-        <a href="/" class="main-btn">
+        <a href="/flights" class="main-btn">
             <div class="box">
-                <img src="/images/motorcycle.png" height="150px" alt="">
-                <h3>Motorcycle</h3>
-                <p>When you want the wind to blow on your face!</p>
+                <img src="/images/flights.png" height="150px" alt="Picture of flights">
+                <h3>Flights</h3>
+                <p>See all flights</p>
             </div>
         </a>
-        <a href="/" class="main-btn">
+        <a href="/tickets" class="main-btn">
             <div class="box">
-                <img src="/images/car.png" height="150px" alt="">
-                <h3>Car</h3>
-                <p>Going on a trip with friends?</p>
+                <img src="/images/ticket.png" height="150px" alt="Picture of ticket">
+                <h3>My tickets</h3>
+                <p>See all my reserved tickets</p>
             </div>
         </a>
     </section>

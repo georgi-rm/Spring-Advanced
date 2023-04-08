@@ -5,14 +5,13 @@ import com.example.airlinetickets.models.dtos.binding.UserRegistrationDto;
 import com.example.airlinetickets.models.dtos.UserRolesDto;
 import com.example.airlinetickets.models.entities.UserEntity;
 import com.example.airlinetickets.models.entities.UserRoleEntity;
-import com.example.airlinetickets.models.enums.UserRoleEnum;
 import com.example.airlinetickets.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -127,9 +126,17 @@ public class UserService {
 //        return allUsers.stream().map(e -> modelMapper.map(e, UserDetailsDto.class)).toList();
     }
 
-    public Optional<UserRolesDto> getById(Long id) {
+    public Optional<UserRolesDto> getUserRolesById(Long id) {
 
         return userRepository.findById(id).map(userEntity -> modelMapper.map(userEntity, UserRolesDto.class));
+
+    }
+
+    public UserEntity getUserEntityByUsername(String username) {
+
+        return userRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
 
     }
 }

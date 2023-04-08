@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Airline Tickets Application</title>
     <th:block th:replace="~{fragments/head}"/>
@@ -9,12 +10,15 @@
 <main class="p-5 align-content-center my-register-div">
 
     <h1 class="text-center text-light">
-        <strong class="pl-3 font-weight-bold">All flights</strong>
+        <strong class="pl-3 font-weight-bold" th:text="${title}">Found flights</strong>
     </h1>
 
     <div class="d-flex justify-content-center">
 
-        <table class="text-light table">
+        <th:block th:if="${foundFlights.isEmpty()}">
+            <h3 class="text-light">Sorry no flights were found</h3>
+        </th:block>
+        <table class="text-light table" th:unless="${foundFlights.isEmpty()}">
             <thead>
             <tr>
                 <th>Flight number</th>
@@ -23,16 +27,23 @@
                 <th>Airplane model</th>
                 <th>Departure</th>
                 <th>Arrival</th>
+                <th sec:authorize="isAuthenticated()">Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="flight : ${allFlights}">
+            <tr th:each="flight : ${foundFlights}">
                 <td th:text="*{flight.flightNumber}">Flight number</td>
                 <td th:text="*{flight.originAirport}">Origin airport</td>
                 <td th:text="*{flight.destinationAirport}">Destination airport</td>
                 <td th:text="*{flight.airplaneModel}">Airplane model</td>
                 <td th:text="${#temporals.format(flight.departureDateTime, 'dd-MM-yyyy HH:mm')}">Departure</td>
                 <td th:text="${#temporals.format(flight.arrivalDateTime, 'dd-MM-yyyy HH:mm')}">Arrival</td>
+                <td sec:authorize="isAuthenticated()">
+                    <a th:href="@{/tickets/reserve/{flightId}(flightId=*{flight.id})}" class="btn btn-primary">
+                        Get ticket
+                    </a>
+                </td>
+
             </tr>
             </tbody>
         </table>

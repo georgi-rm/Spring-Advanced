@@ -4,11 +4,8 @@ import com.example.airlinetickets.exceptions.AirportNotFoundException;
 import com.example.airlinetickets.models.dtos.binding.CreateAirportDto;
 import com.example.airlinetickets.models.dtos.view.AirportViewDto;
 import com.example.airlinetickets.models.entities.AirportEntity;
-import com.example.airlinetickets.models.enums.UserRoleEnum;
 import com.example.airlinetickets.models.mapper.AirportMapper;
 import com.example.airlinetickets.repositories.AirportRepository;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -72,18 +69,17 @@ public class AirportService {
 
     public void deleteAirportById(Long id) {
 
-        airportRepository.deleteById(id);
+        Optional<AirportEntity> airportEntity = airportRepository.findById(id);
+
+        if (airportEntity.isEmpty()) {
+            throw new AirportNotFoundException(id);
+        }
+
+        airportRepository.delete(airportEntity.get());
     }
 
     public boolean isAirportMissing(Long airportId) {
         return airportRepository.findById(airportId).isEmpty();
-    }
-
-    public boolean isModerator(UserDetails userDetails) {
-        return userDetails.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .anyMatch(a -> a.equals("ROLE_" + UserRoleEnum.MODERATOR.name()));
     }
 
 }
