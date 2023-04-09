@@ -114,16 +114,6 @@ public class UserService {
                         .setLastName(e.getLastName())
                         .setEmail(e.getEmail())
                         .setRoles(e.getRoles().stream().map(UserRoleEntity::getRole).toList())).toList();
-
-//        PropertyMap<UserEntity, UserDetailsDto> roleMap = new PropertyMap<UserEntity, UserDetailsDto>() {
-//            protected void configure() {
-//                map().setRoles(source.getRoles().stream().map(UserRoleEntity::getRole).toList());
-//            }
-//        };
-//
-//        modelMapper.addMappings(roleMap);
-//
-//        return allUsers.stream().map(e -> modelMapper.map(e, UserDetailsDto.class)).toList();
     }
 
     public Optional<UserRolesDto> getUserRolesById(Long id) {
