@@ -138,13 +138,15 @@ class FlightControllerIT {
             roles = {"ADMIN", "MODERATOR"}
     )
     void testAddFlightWithInvalidValuesRedirectToFlightAdd() throws Exception {
+        LocalDateTime departureDate = LocalDateTime.now().minusDays(1);
+        LocalDateTime arrivalDate = LocalDateTime.now().minusDays(2);
         mockMvc.perform(post("/flights/add")
                         .param("flightNumber", "")
-                        .param("departureDateTime", "")
-                        .param("arrivalDateTime", "")
-                        .param("originAirportId", "1")
-                        .param("destinationAirportId", "5")
-                        .param("airplaneId", "1")
+                        .param("departureDateTime", departureDate.toString())
+                        .param("arrivalDateTime", arrivalDate.toString())
+                        .param("originAirportId", "100")
+                        .param("destinationAirportId", "100")
+                        .param("airplaneId", "100")
                         .param("distance", "1")
                         .param("premiumTicketPrice", "1")
                         .param("businessTicketPrice", "1")
