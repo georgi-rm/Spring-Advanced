@@ -38,7 +38,7 @@ public class RequestInterceptor implements HandlerInterceptor {
                 .setUser(request.getUserPrincipal() == null ? "Anonymous" : request.getUserPrincipal().getName());
 
 
-        if (request.getMethod().equalsIgnoreCase("POST")) {
+        if (request.getMethod().equalsIgnoreCase("DELETE")) {
             logService.addLog(logAddDto);
         }
     }

@@ -1,9 +1,26 @@
+logging:
+  level:
+    blog: WARN
+    org: WARN
+    org.hibernate.SQL: DEBUG
 spring:
   jpa:
+    generate-ddl: true
     hibernate:
-      ddl-auto: update
-    defer-datasource-initialization: true
-
+      ddl-auto: create-drop
+    open-in-view: false
+    properties:
+      hibernate:
+        ddl-auto: create-drop
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
 
 airline-tickets:
   admin:
